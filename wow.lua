@@ -27604,3 +27604,1706 @@ for _, v_u_9 in v7 do
     end
 end
 m_Loader.SpawnAll(v4, "InterlaceStart")
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.BufferNetwork.SizeAwareChunking
+-- Took 0.1s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local m_Money = require(script.Parent.Parent:WaitForChild("Money"))
+return {
+    ["estimatePriceRecordBytes"] = function(p2)
+        local market_hash_name = p2.market_hash_name
+        return (market_hash_name == nil and 0 or #market_hash_name + 2) + 1 + 8 + (p2.liquidity == nil and 0 or 8)
+    end,
+    ["estimateTransportPriceRecordBytes"] = function(p4)
+        local market_hash_name_0 = p4.market_hash_name
+        return (market_hash_name_0 == nil and 0 or #market_hash_name_0 + 2) + 1 + 4 + (p4.liquidity == nil and 0 or 8)
+    end,
+    ["estimateSkinItemBytes"] = function(p6)
+        local id = p6.id
+        local v8 = (id == nil and 0 or #id + 2) + 2
+        local skin_id = p6.skin_id
+        local v10 = v8 + (skin_id == nil and 0 or #skin_id + 2)
+        local description = p6.description
+        local v12 = v10 + (description == nil and 0 or #description + 2)
+        local name = p6.name
+        local v14 = v12 + (name == nil and 0 or #name + 2)
+        local weapon = p6.weapon
+        local v16
+        if weapon == nil then
+            v16 = 0
+        else
+            local id_0 = weapon.id
+            local v18 = (id_0 == nil and 0 or #id_0 + 2) + 8
+            local name_0 = weapon.name
+            v16 = v18 + (name_0 == nil and 0 or #name_0 + 2)
+        end
+        local v20 = v14 + v16
+        local category = p6.category
+        local v22
+        if category == nil then
+            v22 = 0
+        else
+            local id_1 = category.id
+            local v24 = id_1 == nil and 0 or #id_1 + 2
+            local name_1 = category.name
+            v22 = v24 + (name_1 == nil and 0 or #name_1 + 2)
+        end
+        local v26 = v20 + v22
+        local pattern = p6.pattern
+        local v28
+        if pattern == nil then
+            v28 = 0
+        else
+            local id_2 = pattern.id
+            local v30 = id_2 == nil and 0 or #id_2 + 2
+            local name_2 = pattern.name
+            v28 = v30 + (name_2 == nil and 0 or #name_2 + 2)
+        end
+        local v32 = v26 + v28 + (p6.max_float == nil and 0 or 8) + (p6.min_float == nil and 0 or 8)
+        local wear = p6.wear
+        local v34
+        if wear == nil then
+            v34 = 0
+        else
+            local id_3 = wear.id
+            local v36 = id_3 == nil and 0 or #id_3 + 2
+            local name_3 = wear.name
+            v34 = v36 + (name_3 == nil and 0 or #name_3 + 2)
+        end
+        local v38 = v32 + v34
+        local paint_index = p6.paint_index
+        local v40 = v38 + (paint_index == nil and 0 or #paint_index + 2)
+        local phase = p6.phase
+        local v42 = v40 + (phase == nil and 0 or #phase + 2)
+        local rarity = p6.rarity
+        local v44
+        if rarity == nil then
+            v44 = 0
+        else
+            local id_4 = rarity.id
+            local v46 = id_4 == nil and 0 or #id_4 + 2
+            local name_4 = rarity.name
+            local v48 = v46 + (name_4 == nil and 0 or #name_4 + 2)
+            local color = rarity.color
+            v44 = v48 + (color == nil and 0 or #color + 2)
+        end
+        local v50 = v42 + v44
+        local market_hash_name_1 = p6.market_hash_name
+        local v52 = v50 + (market_hash_name_1 == nil and 0 or #market_hash_name_1 + 2)
+        local team = p6.team
+        local v54
+        if team == nil then
+            v54 = 0
+        else
+            local id_5 = team.id
+            local v56 = id_5 == nil and 0 or #id_5 + 2
+            local name_5 = team.name
+            v54 = v56 + (name_5 == nil and 0 or #name_5 + 2)
+        end
+        local v58 = v52 + v54
+        local style = p6.style
+        local v60
+        if style == nil then
+            v60 = 0
+        else
+            local name_6 = style.name
+            local v62 = (name_6 == nil and 0 or #name_6 + 2) + 8
+            local url = style.url
+            v60 = v62 + (url == nil and 0 or #url + 2)
+        end
+        local v64 = v58 + v60
+        local image = p6.image
+        return v64 + (image == nil and 0 or #image + 2)
+    end,
+    ["estimateCrateBytes"] = function(p66)
+        local contains = p66.contains
+        local v68 = 2
+        for _, v69 in typeof(contains) ~= "table" and {} or p66.contains do
+            local id_6 = v69.id
+            local v71 = (id_6 == nil and 0 or #id_6 + 2) + 1
+            local name_7 = v69.name
+            local v73 = v71 + (name_7 == nil and 0 or #name_7 + 2)
+            local rarity_0 = v69.rarity
+            local v75
+            if rarity_0 == nil then
+                v75 = 0
+            else
+                local id_7 = rarity_0.id
+                local v77 = id_7 == nil and 0 or #id_7 + 2
+                local name_8 = rarity_0.name
+                local v79 = v77 + (name_8 == nil and 0 or #name_8 + 2)
+                local color_0 = rarity_0.color
+                v75 = v79 + (color_0 == nil and 0 or #color_0 + 2)
+            end
+            local v81 = v73 + v75
+            local paint_index_0 = v69.paint_index
+            local v83 = v81 + (paint_index_0 == nil and 0 or #paint_index_0 + 2)
+            local image_0 = v69.image
+            v68 = v68 + (v83 + (image_0 == nil and 0 or #image_0 + 2))
+        end
+        local contains_rare = p66.contains_rare
+        local v86 = 2
+        for _, v87 in typeof(contains_rare) ~= "table" and {} or p66.contains_rare do
+            local id_8 = v87.id
+            local v89 = (id_8 == nil and 0 or #id_8 + 2) + 1
+            local name_9 = v87.name
+            local v91 = v89 + (name_9 == nil and 0 or #name_9 + 2)
+            local rarity_1 = v87.rarity
+            local v93
+            if rarity_1 == nil then
+                v93 = 0
+            else
+                local id_9 = rarity_1.id
+                local v95 = id_9 == nil and 0 or #id_9 + 2
+                local name_10 = rarity_1.name
+                local v97 = v95 + (name_10 == nil and 0 or #name_10 + 2)
+                local color_1 = rarity_1.color
+                v93 = v97 + (color_1 == nil and 0 or #color_1 + 2)
+            end
+            local v99 = v91 + v93
+            local paint_index_1 = v87.paint_index
+            local v101 = v99 + (paint_index_1 == nil and 0 or #paint_index_1 + 2)
+            local image_1 = v87.image
+            v86 = v86 + (v101 + (image_1 == nil and 0 or #image_1 + 2))
+        end
+        local id_10 = p66.id
+        local v104 = (id_10 == nil and 0 or #id_10 + 2) + 1
+        local name_11 = p66.name
+        local v106 = v104 + (name_11 == nil and 0 or #name_11 + 2)
+        local description_0 = p66.description
+        local v108 = v106 + (description_0 == nil and 0 or #description_0 + 2)
+        local type = p66.type
+        local v110 = v108 + (type == nil and 0 or #type + 2)
+        local first_sale_date = p66.first_sale_date
+        local v112 = v110 + (first_sale_date == nil and 0 or #first_sale_date + 2)
+        local rarity_2 = p66.rarity
+        local v114
+        if rarity_2 == nil then
+            v114 = 0
+        else
+            local id_11 = rarity_2.id
+            local v116 = id_11 == nil and 0 or #id_11 + 2
+            local name_12 = rarity_2.name
+            local v118 = v116 + (name_12 == nil and 0 or #name_12 + 2)
+            local color_2 = rarity_2.color
+            v114 = v118 + (color_2 == nil and 0 or #color_2 + 2)
+        end
+        local v120 = v112 + v114
+        local image_2 = p66.image
+        local v122 = v120 + (image_2 == nil and 0 or #image_2 + 2)
+        local market_hash_name_2 = p66.market_hash_name
+        return v122 + (market_hash_name_2 == nil and 0 or #market_hash_name_2 + 2) + v68 + v86
+    end,
+    ["buildArrayChunks"] = function(p124, p125, p126)
+        local v127 = {}
+        local v128 = 11
+        local v129 = {}
+        for _, v130 in p124 do
+            local v131 = p125(v130)
+            local v132
+            if #v127 > 0 then
+                v132 = p126 < v128 + v131
+            else
+                v132 = false
+            end
+            if v132 then
+                table.insert(v129, v127)
+                v127 = {}
+                v128 = 11
+            end
+            table.insert(v127, v130)
+            v128 = v128 + v131
+        end
+        if #v127 > 0 then
+            table.insert(v129, v127)
+        end
+        return v129
+    end,
+    ["mapToPriceRecords"] = function(p133)
+        local v134 = {}
+        for v135, v136 in p133 do
+            local v137
+            if typeof(v136) == "table" then
+                v137 = v136.price
+            else
+                v137 = nil
+            end
+            local v138
+            if typeof(v136) == "table" then
+                v138 = v136.liquidity
+            else
+                v138 = nil
+            end
+            if typeof(v137) ~= "number" and typeof(v136) == "table" then
+                local pricempire = v136.pricempire
+                if typeof(pricempire) == "table" then
+                    local price = pricempire.price
+                    if typeof(price) == "number" then
+                        v137 = pricempire.price
+                    end
+                end
+            end
+            if typeof(v137) ~= "number" and typeof(v136) == "table" then
+                local csfloat = v136.csfloat
+                if typeof(csfloat) == "table" then
+                    local min_price = csfloat.min_price
+                    if typeof(min_price) == "number" then
+                        v137 = csfloat.min_price
+                    end
+                end
+            end
+            if typeof(v137) ~= "number" and typeof(v136) == "table" then
+                local steam = v136.steam
+                if typeof(steam) == "table" then
+                    local last_ever = steam.last_ever
+                    if typeof(last_ever) == "number" then
+                        v137 = steam.last_ever
+                    end
+                end
+            end
+            if typeof(v137) == "number" then
+                table.insert(v134, {
+                    ["market_hash_name"] = v135,
+                    ["price"] = v137,
+                    ["liquidity"] = v138
+                })
+            end
+        end
+        table.sort(v134, function(p145, p146)
+            return p145.market_hash_name < p146.market_hash_name
+        end)
+        return v134
+    end,
+    ["priceRecordsToTransport"] = function(p147)
+        local v148 = {}
+        for v149, v150 in p147 do
+            v148[v149] = {
+                ["market_hash_name"] = v150.market_hash_name,
+                ["price_cents"] = m_Money.dollarsToCents(v150.price),
+                ["liquidity"] = v150.liquidity
+            }
+        end
+        return v148
+    end,
+    ["transportPriceRecordsToPriceRecords"] = function(p151)
+        local v152 = {}
+        for v153, v154 in p151 do
+            v152[v153] = {
+                ["market_hash_name"] = v154.market_hash_name,
+                ["price"] = m_Money.centsToDollars(v154.price_cents),
+                ["liquidity"] = v154.liquidity
+            }
+        end
+        return v152
+    end,
+    ["priceRecordsToMap"] = function(p155)
+        local v156 = {}
+        for _, v157 in p155 do
+            v156[v157.market_hash_name] = {
+                ["price"] = v157.price,
+                ["liquidity"] = v157.liquidity
+            }
+        end
+        return v156
+    end
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.Backoff
+-- Took 0.06s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+return require(game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Backoff"))
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.BankPayoutCalculator
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+require(script.Parent:WaitForChild("Types"))
+local v_u_24 = {
+    ["CalculatePayoutForItem"] = function(p1, p2)
+        assert(p1, "BankItem is nil")
+        local v3 = typeof(p2) == "number"
+        assert(v3, "Current time must be a number")
+        local depositTime = p1.depositTime
+        local valueAtDepositTime = p1.valueAtDepositTime
+        local hourlyRateAtDepositTime = p1.hourlyRateAtDepositTime
+        local v7 = p1.accumulatedOfflineEarnings or 0
+        local v8 = p1.accumulatedOfflineTime or 0
+        local v9 = (p2 - depositTime - v8) / 3600
+        local v10 = valueAtDepositTime * hourlyRateAtDepositTime * v9 + v7
+        return math.max(0, v10)
+    end,
+    ["CalculateTotalPayout"] = function(p11, p12)
+        assert(p11, "BankItems is nil")
+        local v13 = typeof(p12) == "number"
+        assert(v13, "Current time must be a number")
+        local v14 = 0
+        for _, v15 in p11 do
+            v14 = v14 + v_u_24.CalculatePayoutForItem(v15, p12)
+        end
+        return v14
+    end,
+    ["CalculateTotalPayoutFromMap"] = function(p16, p17)
+        assert(p16, "BankItemsMap is nil")
+        local v18 = typeof(p17) == "number"
+        assert(v18, "Current time must be a number")
+        local v19 = 0
+        for _, v20 in p16 do
+            if v20 then
+                v19 = v19 + v_u_24.CalculatePayoutForItem(v20, p17)
+            end
+        end
+        return v19
+    end,
+    ["CalculateDollarRatePerSecond"] = function(p21)
+        assert(p21, "BankItemsMap is nil")
+        local v22 = 0
+        for _, v23 in p21 do
+            if v23 then
+                v22 = v22 + v23.valueAtDepositTime * (v23.hourlyRateAtDepositTime / 3600)
+            end
+        end
+        return v22
+    end
+}
+return v_u_24
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.BankSlotPrices
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+return {
+    [2] = 5000,
+    [3] = 25000,
+    [4] = 250000,
+    [5] = 2500000,
+    [6] = 25000000
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.ChunkedRemote
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local HttpService = game:GetService("HttpService")
+local v2 = {}
+local m_Network = nil
+local function v_u_12(p4, p5)
+    local v6 = #p4
+    local v7 = {}
+    for v8 = 1, v6, p5 do
+        local v9 = v8 + p5 - 1
+        local v10 = math.min(v9, v6)
+        local v11 = table.move(p4, v8, v10, 1, {})
+        table.insert(v7, v11)
+    end
+    return v7
+end
+local function v_u_20(p13, p14)
+    local v15 = {}
+    local v16 = 0
+    local v17 = {}
+    for v18, v19 in p13 do
+        v15[v18] = v19
+        v16 = v16 + 1
+        if p14 <= v16 then
+            table.insert(v17, v15)
+            v15 = {}
+            v16 = 0
+        end
+    end
+    if v16 > 0 then
+        table.insert(v17, v15)
+    end
+    return v17
+end
+local function v_u_26(p21, p22)
+    local v23 = {}
+    for v24 = 1, p22 do
+        local v25 = p21[v24]
+        if v25 then
+            table.move(v25, 1, #v25, #v23 + 1, v23)
+        end
+    end
+    return v23
+end
+local function v_u_34(p27, p28)
+    local v29 = {}
+    for v30 = 1, p28 do
+        local v31 = p27[v30]
+        if v31 then
+            for v32, v33 in v31 do
+                v29[v32] = v33
+            end
+        end
+    end
+    return v29
+end
+local v_u_35 = false
+local v_u_36 = {}
+local v_u_37 = false
+local v_u_38 = {}
+local v_u_39 = {}
+function v2.registerProvider(p40, p41, p42, p43)
+    if not v_u_35 then
+        v_u_35 = true
+        if not m_Network then
+            m_Network = require(script.Parent.Parent:WaitForChild("Network"))
+        end
+        local v_u_44 = m_Network
+        function v_u_44._RequestChunkedTransfer.OnServerInvoke(p45, p46)
+            local v47 = v_u_36[p46]
+            if not v47 then
+                warn("ChunkedRemote: unknown channel \'" .. tostring(p46) .. "\'")
+                return nil
+            end
+            local v48 = v47.dataFn()
+            if v48 == nil then
+                return nil
+            end
+            local dataType = v47.dataType
+            local chunkSize = v47.chunkSize
+            local v51
+            if dataType == "array" then
+                v51 = v_u_12(v48, chunkSize)
+            elseif dataType == "map" then
+                v51 = v_u_20(v48, chunkSize)
+            else
+                error("ChunkedRemote: invalid dataType \'" .. tostring(dataType) .. "\'")
+                v51 = nil
+            end
+            if #v51 <= 1 then
+                return v48
+            end
+            local v52 = HttpService:GenerateGUID(false)
+            for v53, v54 in v51 do
+                v_u_44._ChunkedPayload:FireClient(p45, v52, v53, #v51, "", v47.dataType, v54)
+            end
+            return {
+                ["_chunkedTransfer"] = true,
+                ["_transferId"] = v52,
+                ["_totalChunks"] = #v51,
+                ["_dataType"] = v47.dataType
+            }
+        end
+    end
+    v_u_36[p40] = {
+        ["dataType"] = p41,
+        ["dataFn"] = p42,
+        ["chunkSize"] = p43 or 100
+    }
+end
+function v2.fireAllClientsChunked(p55, p56, p57, p58)
+    if p56 ~= nil then
+        if not m_Network then
+            m_Network = require(script.Parent.Parent:WaitForChild("Network"))
+        end
+        local v59 = m_Network
+        local v60 = p58 or 100
+        local v61
+        if p57 == "array" then
+            v61 = v_u_12(p56, v60)
+        elseif p57 == "map" then
+            v61 = v_u_20(p56, v60)
+        else
+            error("ChunkedRemote: invalid dataType \'" .. tostring(p57) .. "\'")
+            v61 = nil
+        end
+        local v62 = HttpService:GenerateGUID(false)
+        for v63, v64 in v61 do
+            v59._ChunkedPayload:FireAllClients(v62, v63, #v61, p55, p57, v64)
+        end
+    end
+end
+function v2.requestChunked(p65)
+    if not v_u_37 then
+        v_u_37 = true
+        if not m_Network then
+            m_Network = require(script.Parent.Parent:WaitForChild("Network"))
+        end
+        m_Network._ChunkedPayload.OnClientEvent:Connect(function(p66, p67, p68, p69, p70, p71)
+            local v72 = v_u_38[p66]
+            if not v72 then
+                v72 = {
+                    ["chunks"] = {},
+                    ["received"] = 0,
+                    ["total"] = p68,
+                    ["channelName"] = p69,
+                    ["dataType"] = p70
+                }
+                v_u_38[p66] = v72
+            end
+            v72.chunks[p67] = p71
+            v72.received = v72.received + 1
+            if p69 ~= "" and p68 <= v72.received then
+                local chunks = v72.chunks
+                local v74
+                if p70 == "array" then
+                    v74 = v_u_26(chunks, p68)
+                else
+                    v74 = v_u_34(chunks, p68)
+                end
+                v_u_38[p66] = nil
+                local v75 = v_u_39[p69]
+                if v75 then
+                    for _, v76 in v75 do
+                        if v76.connected then
+                            task.spawn(v76.callback, v74)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+    if not m_Network then
+        m_Network = require(script.Parent.Parent:WaitForChild("Network"))
+    end
+    local v77 = m_Network._RequestChunkedTransfer:InvokeServer(p65)
+    if typeof(v77) ~= "table" or not v77._chunkedTransfer then
+        return v77
+    end
+    local _transferId = v77._transferId
+    local _totalChunks = v77._totalChunks
+    local _dataType = v77._dataType
+    local v81 = v_u_38[_transferId]
+    if not v81 then
+        v81 = {
+            ["chunks"] = {},
+            ["received"] = 0,
+            ["total"] = _totalChunks,
+            ["channelName"] = "",
+            ["dataType"] = _dataType
+        }
+        v_u_38[_transferId] = v81
+    end
+    v81.total = _totalChunks
+    local v82 = os.clock()
+    while v81.received < _totalChunks do
+        if os.clock() - v82 > 30 then
+            local v83 = warn
+            local v84 = tostring(30)
+            local received = v81.received
+            v83("ChunkedRemote: transfer timed out (" .. v84 .. "s). Received " .. tostring(received) .. "/" .. tostring(_totalChunks) .. " chunks.")
+            break
+        end
+    end
+    local chunks_0 = v81.chunks
+    local v87
+    if _dataType == "array" then
+        v87 = v_u_26(chunks_0, _totalChunks)
+    else
+        v87 = v_u_34(chunks_0, _totalChunks)
+    end
+    v_u_38[_transferId] = nil
+    return v87
+end
+function v2.onBroadcast(p_u_88, p89)
+    if not v_u_37 then
+        v_u_37 = true
+        if not m_Network then
+            m_Network = require(script.Parent.Parent:WaitForChild("Network"))
+        end
+        m_Network._ChunkedPayload.OnClientEvent:Connect(function(p90, p91, p92, p93, p94, p95)
+            local v96 = v_u_38[p90]
+            if not v96 then
+                v96 = {
+                    ["chunks"] = {},
+                    ["received"] = 0,
+                    ["total"] = p92,
+                    ["channelName"] = p93,
+                    ["dataType"] = p94
+                }
+                v_u_38[p90] = v96
+            end
+            v96.chunks[p91] = p95
+            v96.received = v96.received + 1
+            if p93 ~= "" and p92 <= v96.received then
+                local chunks_1 = v96.chunks
+                local v98
+                if p94 == "array" then
+                    v98 = v_u_26(chunks_1, p92)
+                else
+                    v98 = v_u_34(chunks_1, p92)
+                end
+                v_u_38[p90] = nil
+                local v99 = v_u_39[p93]
+                if v99 then
+                    for _, v100 in v99 do
+                        if v100.connected then
+                            task.spawn(v100.callback, v98)
+                        end
+                    end
+                end
+            end
+        end)
+    end
+    local v_u_101 = {
+        ["callback"] = p89,
+        ["connected"] = true
+    }
+    local v102 = v_u_39[p_u_88]
+    if not v102 then
+        v102 = {}
+        v_u_39[p_u_88] = v102
+    end
+    table.insert(v102, v_u_101)
+    return {
+        ["Disconnect"] = function()
+            v_u_101.connected = false
+            local v103 = v_u_39[p_u_88]
+            local v104 = v103 and table.find(v103, v_u_101)
+            if v104 then
+                table.remove(v103, v104)
+            end
+        end
+    }
+end
+return v2
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.EntropyCubePhrases
+-- Took 0.24s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local v_u_1 = {
+    "Cube: I am a Random Number Generator (RNG)!",
+    "Cube: Wheee!",
+    "Cube: *happy tumbling noises*",
+    "Cube: I believe I can flyyyy!",
+    "Cube: AAAAAAAAAAAAAAAAAAAAAAA",
+    "Cube: Are ya winning, son?",
+    "Cube: I\'m scared of heights. Wait. WAIT!!",
+    "Cube: Chaos is my middle name! Well, I don\'t have a middle name, but still!",
+    "Cube: I\'m basically a magic 8-ball, but cooler and more mathematical!",
+    "Cube: Fun fact: I\'m powered by pure entropy and questionable life choices!",
+    "Cube: *flashes* Did you see that? I just randomized someone\'s roll! You\'re welcome!",
+    "Cube: Some call it luck, I call it... well, actually it is luck. But I help!",
+    "Cube: I\'m like a dice, but with more personality and existential questions!",
+    "Cube: My job is like shuffling cards, but with physics!",
+    "Cube: Rotation changes the random seed I generate!",
+    "Cube: I\'ve got a certified random roll with your name on it!",
+    "Cube: Do you ever feel a bit... odd? \240\159\142\178",
+    "Cube: After I roll 6 they always want me to roll a 7 and I don\'t know why \240\159\152\173",
+    "Cube: My size is 7 x 7 x 7! Guess you can say I was born lucky \240\159\141\128",
+    "Cube: Did you know... There is no such thing as a truly random number in classical mechanics? \240\159\152\177",
+    "Cube: Did you know... True, irreducible randomness only exists in quantum mechanics? \226\154\155\239\184\143\240\159\164\175"
+}
+return {
+    ["GetRandomPhrase"] = function(_)
+        return v_u_1[math.random(1, #v_u_1)]
+    end
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.EntropyCubeUtils
+-- Took 0.06s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+return {
+    ["CalculateRandomSeed"] = function(p1)
+        local XVector = p1.XVector
+        local YVector = p1.YVector
+        local ZVector = p1.ZVector
+        local v5 = XVector.X * 1000000
+        local v6 = 0 + math.floor(v5) * 1000000
+        local v7 = XVector.Y * 1000000
+        local v8 = v6 + math.floor(v7) * 1000
+        local v9 = XVector.Z * 1000000
+        local v10 = v8 + math.floor(v9)
+        local v11 = YVector.X * 1000000
+        local v12 = v10 + math.floor(v11) * 1000000000
+        local v13 = YVector.Y * 1000000
+        local v14 = v12 + math.floor(v13) * 1000000
+        local v15 = YVector.Z * 1000000
+        local v16 = v14 + math.floor(v15) * 1000
+        local v17 = ZVector.X * 1000000
+        local v18 = v16 + math.floor(v17) * 1000000000000
+        local v19 = ZVector.Y * 1000000
+        local v20 = v18 + math.floor(v19) * 1000000000
+        local v21 = ZVector.Z * 1000000
+        local v22 = v20 + math.floor(v21) * 1000000
+        return math.abs(v22) % 2147483647
+    end
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.Money
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local v_u_6 = {
+    ["dollarsToCents"] = function(p1)
+        if typeof(p1) == "number" and p1 == p1 then
+            if p1 >= 0 then
+                local v2 = p1 * 100 + 0.5
+                return math.floor(v2)
+            else
+                local v3 = p1 * 100 - 0.5
+                return math.ceil(v3)
+            end
+        else
+            return 0
+        end
+    end,
+    ["centsToDollars"] = function(p4)
+        return (typeof(p4) ~= "number" or p4 ~= p4) and 0 or p4 / 100
+    end,
+    ["roundDollars"] = function(p5)
+        return v_u_6.centsToDollars(v_u_6.dollarsToCents(p5))
+    end
+}
+return v_u_6
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.PlaytimeRewards
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+require(script.Parent:WaitForChild("Types"))
+return {
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 60
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 180
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 360
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 720
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 1080
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 2160
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 2880
+    },
+    {
+        ["imageId"] = "rbxassetid://112260376194730",
+        ["playTime"] = 3600
+    },
+    {
+        ["imageId"] = "rbxassetid://122124349221994",
+        ["playTime"] = 5400
+    }
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.RarityOdds
+-- Took 0.07s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+require(script.Parent.Types)
+local v_u_1 = {}
+local v_u_2 = {
+    ["#4b69ff"] = "Mil-Spec (Blue)",
+    ["#8847ff"] = "Restricted (Purple)",
+    ["#d32ce6"] = "Exotic (Pink)",
+    ["#eb4b4b"] = "Covert (Red)",
+    ["#e4ae39"] = "Rare Special (Gold)"
+}
+local v_u_3 = {
+    [0] = 3,
+    [1] = 24,
+    [2] = 33,
+    [3] = 24,
+    [4] = 16
+}
+local v_u_4 = {
+    ["Factory New"] = 3,
+    ["Minimal Wear"] = 24,
+    ["Field-Tested"] = 33,
+    ["Well-Worn"] = 24,
+    ["Battle-Scarred"] = 16
+}
+local v_u_5 = {
+    ["Phase 1"] = 24,
+    ["Phase 2"] = 24,
+    ["Phase 3"] = 24,
+    ["Phase 4"] = 24,
+    ["Ruby"] = 0.67,
+    ["Sapphire"] = 0.67,
+    ["Black Pearl"] = 0.25
+}
+local v_u_6 = {
+    ["Phase 1"] = 24,
+    ["Phase 2"] = 24,
+    ["Phase 3"] = 24,
+    ["Phase 4"] = 24,
+    ["Emerald"] = 0.67
+}
+local v_u_7 = {
+    ["#4b69ff"] = 79.92,
+    ["#8847ff"] = 15.99,
+    ["#d32ce6"] = 3.2,
+    ["#eb4b4b"] = 0.64,
+    ["#e4ae39"] = 0.26
+}
+local v_u_8 = {
+    ["Case"] = v_u_7,
+    ["Souvenir"] = {
+        ["#b0c3d9"] = 79.87,
+        ["#5e98d9"] = 15.95,
+        ["#4b69ff"] = 3.33,
+        ["#8847ff"] = 0.67,
+        ["#d32ce6"] = 0.13,
+        ["#eb4b4b"] = 0.03
+    },
+    ["Capsule"] = {
+        ["#4b69ff"] = 80.65,
+        ["#8847ff"] = 16.13,
+        ["#d32ce6"] = 3.23
+    },
+    ["FreeCase"] = {
+        ["##e4ae39"] = 0.26,
+        ["#4b69ff"] = 99.74
+    }
+}
+local v_u_9 = Random.new()
+function v_u_1.GetOddsForType(p10)
+    return v_u_8[p10 or "Case"] or v_u_7
+end
+local v_u_11 = {
+    ["Case"] = {
+        ["#e4ae39"] = 1,
+        ["#eb4b4b"] = 0.75,
+        ["#d32ce6"] = 0.5,
+        ["#8847ff"] = 0.25,
+        ["#4b69ff"] = 0
+    },
+    ["Souvenir"] = {
+        ["#eb4b4b"] = 1,
+        ["#d32ce6"] = 0.8,
+        ["#8847ff"] = 0.6,
+        ["#4b69ff"] = 0.4,
+        ["#5e98d9"] = 0.2,
+        ["#b0c3d9"] = 0
+    },
+    ["Capsule"] = {
+        ["#d32ce6"] = 1,
+        ["#8847ff"] = 0.5,
+        ["#4b69ff"] = 0
+    },
+    ["FreeCase"] = {
+        ["#4b69ff"] = 0
+    }
+}
+function v_u_1.GetBoostedOdds(p12, p13)
+    local v14 = p12 or "Case"
+    local v15 = v_u_1.GetOddsForType(v14)
+    local v16 = (typeof(p13) == "number" and p13 and p13 or 0) * 0.01
+    if v16 == 0 then
+        return v15
+    end
+    local v17 = v_u_11[v14] or {}
+    local v18 = {}
+    for v19, v20 in v15 do
+        v18[v19] = v20
+    end
+    for v21, v22 in v18 do
+        local v23
+        if typeof(v21) == "string" then
+            v23 = string.lower(v21)
+            if string.sub(v23, 1, 1) ~= "#" then
+                v23 = "#" .. v23
+            end
+        else
+            v23 = ""
+        end
+        v18[v21] = v22 * ((v17[v23] or 0) * v16 + 1)
+    end
+    local v24 = 0
+    for _, v25 in v18 do
+        v24 = v24 + v25
+    end
+    if v24 <= 0 then
+        return v18
+    end
+    for v26, v27 in v18 do
+        v18[v26] = v27 / v24 * 100
+    end
+    return v18
+end
+function v_u_1.SampleHex(p28, p29)
+    local v30 = p29 or v_u_9
+    local v31 = v_u_1.GetOddsForType(p28)
+    local v32 = 0
+    for _, v33 in v31 do
+        v32 = v32 + v33
+    end
+    if v32 <= 0 then
+        return nil
+    end
+    local v34 = v30:NextNumber(0, v32)
+    local v35 = 0
+    for v36, v37 in v31 do
+        v35 = v35 + v37
+        if v34 <= v35 then
+            if typeof(v36) ~= "string" then
+                return ""
+            end
+            local v38 = string.lower(v36)
+            if string.sub(v38, 1, 1) ~= "#" then
+                v38 = "#" .. v38
+            end
+            return v38
+        end
+    end
+    local v39 = nil
+    for v40, _ in v31 do
+        v39 = v40
+    end
+    if typeof(v39) ~= "string" then
+        return ""
+    end
+    local v41 = string.lower(v39)
+    if string.sub(v41, 1, 1) ~= "#" then
+        v41 = "#" .. v41
+    end
+    return v41
+end
+function v_u_1.SampleHexWithBoost(p42, p43, p44)
+    local v45 = p44 or v_u_9
+    local v46 = v_u_1.GetBoostedOdds(p42, p43)
+    local v47 = 0
+    for _, v48 in v46 do
+        v47 = v47 + v48
+    end
+    if v47 <= 0 then
+        return nil
+    end
+    local v49 = v45:NextNumber(0, v47)
+    local v50 = 0
+    for v51, v52 in v46 do
+        v50 = v50 + v52
+        if v49 <= v50 then
+            if typeof(v51) ~= "string" then
+                return ""
+            end
+            local v53 = string.lower(v51)
+            if string.sub(v53, 1, 1) ~= "#" then
+                v53 = "#" .. v53
+            end
+            return v53
+        end
+    end
+    local v54 = nil
+    for v55, _ in v46 do
+        v54 = v55
+    end
+    if typeof(v54) ~= "string" then
+        return ""
+    end
+    local v56 = string.lower(v54)
+    if string.sub(v56, 1, 1) ~= "#" then
+        v56 = "#" .. v56
+    end
+    return v56
+end
+function v_u_1.SampleWear()
+    local v57 = 0
+    for _, v58 in v_u_3 do
+        v57 = v57 + v58
+    end
+    if v57 <= 0 then
+        return nil
+    end
+    local v59 = v_u_9:NextNumber(0, v57)
+    local v60 = 0
+    for v61, v62 in v_u_3 do
+        v60 = v60 + v62
+        if v59 <= v60 then
+            return v61
+        end
+    end
+    local v63 = nil
+    for v64, _ in v_u_3 do
+        v63 = v64
+    end
+    return v63
+end
+function v_u_1.NormalizeHex(p65)
+    if typeof(p65) ~= "string" then
+        return ""
+    end
+    local v66 = string.lower(p65)
+    if string.sub(v66, 1, 1) ~= "#" then
+        v66 = "#" .. v66
+    end
+    return v66
+end
+function v_u_1.GetHexName(p67)
+    return v_u_2[p67] or "Unknown"
+end
+function v_u_1.GetPhaseOddsForDopplerFamily(p68)
+    local v69
+    if (p68 or "Doppler") == "Gamma Doppler" then
+        v69 = v_u_6
+    else
+        v69 = v_u_5
+    end
+    local v70 = {}
+    for v71, v72 in v69 do
+        v70[v71] = v72
+    end
+    local v73 = 0
+    for _, v74 in v70 do
+        v73 = v73 + v74
+    end
+    if v73 <= 0 then
+        return v70
+    end
+    for v75, v76 in v70 do
+        v70[v75] = v76 / v73 * 100
+    end
+    return v70
+end
+function v_u_1.SamplePhase(p77)
+    local v78 = v_u_1.GetPhaseOddsForDopplerFamily(p77)
+    local v79 = 0
+    for _, v80 in v78 do
+        v79 = v79 + v80
+    end
+    if v79 <= 0 then
+        return nil
+    end
+    local v81 = v_u_9:NextNumber(0, v79)
+    local v82 = 0
+    for v83, v84 in v78 do
+        v82 = v82 + v84
+        if v81 <= v82 then
+            return v83
+        end
+    end
+    local v85 = nil
+    for v86, _ in v78 do
+        v85 = v86
+    end
+    return v85
+end
+function v_u_1.SampleWearName()
+    -- failed to decompile
+end
+return v_u_1
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.ShopCashOffers
+-- Took 0.06s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local v_u_1 = {
+    ["SmallCashPack"] = {
+        ["offerKey"] = "SmallCashPack",
+        ["productId"] = 3561837079,
+        ["cashAmount"] = 250
+    },
+    ["LargeCashPack"] = {
+        ["offerKey"] = "LargeCashPack",
+        ["productId"] = 3561837188,
+        ["cashAmount"] = 1500
+    },
+    ["CrateCashPack"] = {
+        ["offerKey"] = "CrateCashPack",
+        ["productId"] = 3561837244,
+        ["cashAmount"] = 3000
+    },
+    ["VaultCashPack"] = {
+        ["offerKey"] = "VaultCashPack",
+        ["productId"] = 3561837869,
+        ["cashAmount"] = 6500
+    },
+    ["StorageUnitCashPack"] = {
+        ["offerKey"] = "StorageUnitCashPack",
+        ["productId"] = 3561838045,
+        ["cashAmount"] = 17500
+    },
+    ["CargoShipCashPack"] = {
+        ["offerKey"] = "CargoShipCashPack",
+        ["productId"] = 3561838109,
+        ["cashAmount"] = 40000
+    }
+}
+local v_u_2 = {}
+for _, v3 in v_u_1 do
+    v_u_2[v3.productId] = v3
+end
+local function v_u_9(p4)
+    local v5 = p4 + 0.5
+    local v6 = math.floor(v5)
+    local v7 = tostring(v6)
+    repeat
+        local v8
+        v7, v8 = string.gsub(v7, "^(-?%d+)(%d%d%d)", "%1,%2")
+    until v8 == 0
+    return v7
+end
+return {
+    ["CASH_OFFERS"] = v_u_1,
+    ["CASH_OFFERS_BY_PRODUCT_ID"] = v_u_2,
+    ["GetOffer"] = function(p10)
+        return v_u_1[p10]
+    end,
+    ["GetOfferByProductId"] = function(p11)
+        return v_u_2[p11]
+    end,
+    ["FormatCashAmount"] = function(p12)
+        return string.format("$%s", (v_u_9(p12)))
+    end
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.ShopOfferCatalog
+-- Took 0.15s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local m_ShopCashOffers = require(script.Parent:WaitForChild("ShopCashOffers"))
+local v_u_2 = {
+    0,
+    3437840809,
+    3437840932,
+    3437840999,
+    3437841081,
+    3437841622,
+    3437841863
+}
+local v_u_3 = {
+    [2] = 3562478085,
+    [3] = 3562478157,
+    [4] = 3562478233,
+    [5] = 3562478321,
+    [6] = 3562478372,
+    [7] = 3562478457
+}
+local v_u_4 = {
+    0,
+    3437842248,
+    3437842405,
+    3437842523,
+    3437842626
+}
+local v_u_5 = {
+    [2] = 3562477277,
+    [3] = 3562477435,
+    [4] = 3562477575,
+    [5] = 3562477707
+}
+local v_u_6 = {
+    ["CargoShipCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.CargoShipCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["StorageUnitCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.StorageUnitCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["VaultCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.VaultCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["CrateCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.CrateCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["LargeCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.LargeCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["SmallCashPack"] = {
+        ["productId"] = m_ShopCashOffers.CASH_OFFERS.SmallCashPack.productId,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["ExtraStorageProduct"] = {
+        ["productId"] = 3437843238,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["LuckBoostProduct10Minutes"] = {
+        ["productId"] = 3437843849,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["LuckBoostProduct30Minutes"] = {
+        ["productId"] = 3561900025,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["LuckBoostProduct1Hour"] = {
+        ["productId"] = 3561900271,
+        ["infoType"] = Enum.InfoType.Product
+    },
+    ["VIPGamepass"] = {
+        ["productId"] = 1547483976,
+        ["infoType"] = Enum.InfoType.GamePass
+    },
+    ["Lucky"] = {
+        ["productId"] = 1545980245,
+        ["infoType"] = Enum.InfoType.GamePass
+    },
+    ["Super"] = {
+        ["productId"] = 1545876317,
+        ["infoType"] = Enum.InfoType.GamePass
+    },
+    ["BankSlotsGamepass"] = {
+        ["productId"] = 1581798507,
+        ["infoType"] = Enum.InfoType.GamePass
+    },
+    ["StatTrakLuckGamepass"] = {
+        ["productId"] = 1763769226,
+        ["infoType"] = Enum.InfoType.GamePass
+    },
+    ["SouvenirLuckGamepass"] = {
+        ["productId"] = 1763907236,
+        ["infoType"] = Enum.InfoType.GamePass
+    }
+}
+local v_u_7 = {
+    ["CargoShipCashPack"] = 3562476987,
+    ["StorageUnitCashPack"] = 3562478915,
+    ["VaultCashPack"] = 3562479023,
+    ["CrateCashPack"] = 3562477860,
+    ["LargeCashPack"] = 3562477967,
+    ["SmallCashPack"] = 3562478792,
+    ["ExtraStorageProduct"] = 3562476819,
+    ["VIPGamepass"] = 3561898525,
+    ["Lucky"] = 3561898628,
+    ["Super"] = 3561898779,
+    ["BankSlotsGamepass"] = 3561898876,
+    ["StatTrakLuckGamepass"] = 3561898961,
+    ["SouvenirLuckGamepass"] = 3561899027
+}
+local v_u_28 = {
+    ["CASE_TIME_GIFT_PRODUCTS"] = v_u_5,
+    ["CASE_TIME_PASSES"] = v_u_4,
+    ["CRATE_SLOT_GIFT_PRODUCTS"] = v_u_3,
+    ["CRATE_SLOT_PASSES"] = v_u_2,
+    ["GAMEPASS_ID_BY_OFFER"] = {
+        ["VIPGamepass"] = 1547483976,
+        ["Lucky"] = 1545980245,
+        ["Super"] = 1545876317,
+        ["BankSlotsGamepass"] = 1581798507,
+        ["StatTrakLuckGamepass"] = 1763769226,
+        ["SouvenirLuckGamepass"] = 1763907236
+    },
+    ["OFFER_DISPLAY_NAMES"] = {
+        ["CargoShipCashPack"] = "Cargo Ship Cash Pack",
+        ["StorageUnitCashPack"] = "Storage Unit Cash Pack",
+        ["VaultCashPack"] = "Vault Cash Pack",
+        ["CrateCashPack"] = "Crate Cash Pack",
+        ["LargeCashPack"] = "Large Cash Pack",
+        ["SmallCashPack"] = "Small Cash Pack",
+        ["MoreCasesProduct"] = "Open More Cases",
+        ["FasterCasesProduct"] = "Case Speed",
+        ["ExtraStorageProduct"] = "+100 Storage Space",
+        ["VIPGamepass"] = "VIP",
+        ["Lucky"] = "Lucky",
+        ["Super"] = "Super Lucky",
+        ["BankSlotsGamepass"] = "Bank Slots",
+        ["StatTrakLuckGamepass"] = "StatTrak Luck",
+        ["SouvenirLuckGamepass"] = "Souvenir Luck"
+    },
+    ["STATIC_GIFT_PRODUCT_IDS"] = v_u_7,
+    ["STATIC_PURCHASE_OFFER_DESCRIPTORS"] = v_u_6,
+    ["GetNextCrateSlotProductId"] = function(p8)
+        local v9 = p8 + 1
+        local v10 = #v_u_2
+        local v11 = math.min(v9, v10)
+        if v11 <= p8 then
+            return nil
+        else
+            local v12 = v_u_2[v11]
+            if v12 and v12 ~= 0 then
+                return v12
+            else
+                return nil
+            end
+        end
+    end,
+    ["GetNextCrateSlotGiftProductId"] = function(p13)
+        local v14 = p13 + 1
+        local v15 = #v_u_2
+        local v16 = math.min(v14, v15)
+        if v16 <= p13 then
+            return nil
+        else
+            return v_u_3[v16]
+        end
+    end,
+    ["GetNextCaseTimeProductId"] = function(p17)
+        if #v_u_4 - 1 <= p17 then
+            return nil
+        else
+            local v18 = v_u_4[p17 + 2]
+            if v18 and v18 ~= 0 then
+                return v18
+            else
+                return nil
+            end
+        end
+    end,
+    ["GetNextCaseTimeGiftProductId"] = function(p19)
+        if #v_u_4 - 1 <= p19 then
+            return nil
+        else
+            return v_u_5[p19 + 2]
+        end
+    end,
+    ["GetOfferDescriptor"] = function(p20, p21, p22)
+        if p20 == "MoreCasesProduct" then
+            local v23 = v_u_28.GetNextCrateSlotProductId(p21)
+            return v23 and {
+                ["productId"] = v23,
+                ["infoType"] = Enum.InfoType.Product
+            } or nil
+        end
+        if p20 ~= "FasterCasesProduct" then
+            return v_u_6[p20]
+        end
+        local v24 = v_u_28.GetNextCaseTimeProductId(p22)
+        return v24 and {
+            ["productId"] = v24,
+            ["infoType"] = Enum.InfoType.Product
+        } or nil
+    end,
+    ["GetGiftProductId"] = function(p25, p26, p27)
+        if p25 == "MoreCasesProduct" then
+            return v_u_28.GetNextCrateSlotGiftProductId(p26)
+        elseif p25 == "FasterCasesProduct" then
+            return v_u_28.GetNextCaseTimeGiftProductId(p27)
+        else
+            return v_u_7[p25]
+        end
+    end
+}
+return v_u_28
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.SortUtils
+-- Took 0.09s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+require(script.Parent.Types)
+local v_u_18 = {
+    ["RED_HEX"] = "#eb4b4b",
+    ["PINK_HEX"] = "#d32ce6",
+    ["GOLD_HEX"] = "#e4ae33",
+    ["BLUE_HEX"] = "#4b69ff",
+    ["RARITY_WEIGHT_BY_HEX"] = {
+        ["#b0c3d9"] = 1,
+        ["#5e98d9"] = 2,
+        ["#4b69ff"] = 3,
+        ["#8847ff"] = 4,
+        ["#d32ce6"] = 5,
+        ["#eb4b4b"] = 6,
+        ["#e4ae33"] = 7
+    },
+    ["getItemRarityHex"] = function(p1)
+        local rarity = p1.rarity
+        if rarity then
+            local color = rarity.color
+            if typeof(color) == "string" then
+                return string.lower(rarity.color)
+            end
+        end
+        return ""
+    end,
+    ["isStarName"] = function(p4)
+        if typeof(p4) ~= "string" then
+            return false
+        end
+        local v5 = string.gsub(p4, "^%s+", "")
+        return string.match(v5, "^\226\152\133") ~= nil
+    end,
+    ["isRedHex"] = function(p6)
+        return p6 == v_u_18.RED_HEX
+    end,
+    ["isPinkHex"] = function(p7)
+        return p7 == v_u_18.PINK_HEX
+    end,
+    ["isGoldHex"] = function(p8)
+        return p8 == v_u_18.GOLD_HEX
+    end,
+    ["isBlueHex"] = function(p9)
+        return p9 == v_u_18.BLUE_HEX
+    end,
+    ["isStarItem"] = function(p10)
+        local v11 = p10.market_hash_name
+        if typeof(v11) ~= "string" or #v11 == 0 then
+            v11 = p10.name
+        end
+        return v_u_18.isStarName(v11)
+    end,
+    ["isRedRarity"] = function(p12)
+        return v_u_18.getItemRarityHex(p12) == v_u_18.RED_HEX
+    end,
+    ["isGoldRarity"] = function(p13)
+        return v_u_18.getItemRarityHex(p13) == v_u_18.GOLD_HEX
+    end,
+    ["shouldQuickSellRed"] = function(p14)
+        local v15 = v_u_18.isRedRarity(p14)
+        if v15 then
+            v15 = not v_u_18.isStarItem(p14)
+        end
+        return v15
+    end,
+    ["shouldQuickSellGold"] = function(p16)
+        if v_u_18.isGoldRarity(p16) then
+            return true
+        end
+        local v17 = v_u_18.isRedRarity(p16)
+        if v17 then
+            v17 = v_u_18.isStarItem(p16)
+        end
+        return v17
+    end
+}
+local function v_u_27(p19, p20, p21)
+    local v22 = p21 and 1 or -1
+    local v23 = typeof(p19)
+    local v24 = typeof(p20)
+    if v23 == "number" and v24 == "number" then
+        return v22 * (p19 - p20) > 0
+    elseif v23 == "table" and v24 == "table" then
+        local v25 = p19[1]
+        local v26 = p20[1]
+        if v25 == v26 then
+            return v22 * (p19[2] - p20[2]) > 0
+        else
+            return v22 * (v25 - v26) > 0
+        end
+    else
+        return tostring(p19) < tostring(p20)
+    end
+end
+function v_u_18.decorateSort(p28, p29, p_u_30)
+    local v31 = table.create(#p28)
+    for v32 = 1, #p28 do
+        local v33 = p28[v32]
+        v31[v32] = {
+            ["key"] = p29(v33),
+            ["item"] = v33
+        }
+    end
+    if p_u_30 == nil then
+        p_u_30 = false
+    end
+    table.sort(v31, function(p34, p35)
+        return v_u_27(p34.key, p35.key, p_u_30)
+    end)
+    local v36 = table.create(#v31)
+    for v37 = 1, #v31 do
+        v36[v37] = v31[v37].item
+    end
+    return v36
+end
+return v_u_18
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.Types
+-- Took 0.09s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+return {}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.SharedModules.Zone
+-- Took 0.08s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local m_Janitor = require(game:GetService("ReplicatedStorage"):WaitForChild("Packages"):WaitForChild("Janitor"))
+local v_u_2 = {}
+v_u_2.__index = v_u_2
+function v_u_2.new(p3)
+    local v4 = {}
+    local v5 = v_u_2
+    setmetatable(v4, v5)
+    v4._Janitor = m_Janitor.new()
+    v4.Name = p3.Name
+    v4.Instance = p3
+    v4.Parts = p3:GetChildren()
+    v4.lastOccupancy = false
+    local CFrame = p3.CFrame
+    local Size = p3.Size
+    v4.bboxData = CFrame.fromMatrix(CFrame.Position, CFrame.XVector / Size.X, CFrame.YVector / Size.Y, CFrame.ZVector / Size.Z):Inverse()
+    p3.Transparency = 1
+    return v4
+end
+function v_u_2._testOccupancy(p8, p9)
+    local v10 = p8.bboxData * p9
+    local v11 = v10.X
+    local v12
+    if math.abs(v11) < 0.5 then
+        local v13 = v10.Y
+        if math.abs(v13) < 0.5 then
+            local v14 = v10.Z
+            v12 = math.abs(v14) < 0.5
+        else
+            v12 = false
+        end
+    else
+        v12 = false
+    end
+    return v12 and true or false
+end
+function v_u_2.Destroy(p15)
+    p15._Janitor:Destroy()
+end
+return {
+    ["new"] = v_u_2.new,
+    ["Zone"] = v_u_2
+}
+-- Script Path: game:GetService("ReplicatedStorage").RojoShared.Network
+-- Took 0.06s to decompile.
+-- Executor: Synapse Z (v1.0.1.6)
+
+-- Decompiled with Medal
+
+local RunService = game:GetService("RunService")
+local TestService = game:GetService("TestService")
+local m_TypedRemote = require(script.Parent.Parent:WaitForChild("Packages"):WaitForChild("TypedRemote"))
+require(script.Parent:WaitForChild("SharedModules"):WaitForChild("Types"))
+local v4, v5
+if RunService:IsRunning() then
+    v4, v5 = m_TypedRemote.parent(script)
+else
+    local v_u_6 = {}
+    v4 = function(p7)
+        local v8 = v_u_6[p7]
+        if v8 ~= nil then
+            return v8
+        end
+        if RunService:IsClient() then
+            local _MockRemotes = TestService:FindFirstChild("_MockRemotes")
+            if _MockRemotes == nil or not _MockRemotes:IsA("Folder") then
+                _MockRemotes = Instance.new("Folder")
+                _MockRemotes.Name = "_MockRemotes"
+                _MockRemotes.Parent = TestService
+            end
+            local v10 = _MockRemotes:FindFirstChild(p7)
+            if v10 == nil then
+                local v11 = Instance.new("RemoteFunction")
+                v11.Name = p7
+                v11.Parent = _MockRemotes
+            elseif not v10:IsA("RemoteFunction") then
+                warn("[Network] Studio mock: FrigidRNG_StudioNetworkMocks already has a non-RemoteFunction named", p7)
+            end
+            local v12 = {
+                ["InvokeServer"] = function(_, ...)
+                    return nil
+                end
+            }
+            v_u_6[p7] = v12
+            return v12
+        end
+        local v13 = Instance.new("RemoteFunction")
+        v13.Name = p7
+        local _MockRemotes_0 = TestService:FindFirstChild("_MockRemotes")
+        if _MockRemotes_0 == nil or not _MockRemotes_0:IsA("Folder") then
+            _MockRemotes_0 = Instance.new("Folder")
+            _MockRemotes_0.Name = "_MockRemotes"
+            _MockRemotes_0.Parent = TestService
+        end
+        v13.Parent = _MockRemotes_0
+        function v13.OnServerInvoke()
+            return nil
+        end
+        v_u_6[p7] = v13
+        return v13
+    end
+    v5 = function(p15)
+        local _MockRemotes_1 = TestService:FindFirstChild("_MockRemotes")
+        if _MockRemotes_1 == nil or not _MockRemotes_1:IsA("Folder") then
+            _MockRemotes_1 = Instance.new("Folder")
+            _MockRemotes_1.Name = "_MockRemotes"
+            _MockRemotes_1.Parent = TestService
+        end
+        local v17 = _MockRemotes_1:FindFirstChild(p15)
+        if v17 ~= nil and v17:IsA("RemoteEvent") then
+            return v17
+        end
+        local v18 = Instance.new("RemoteEvent")
+        v18.Name = p15
+        v18.Parent = _MockRemotes_1
+        return v18
+    end
+end
+return {
+    ["GetPlayerData"] = v4("GetPlayerData"),
+    ["GetCashBalance"] = v4("GetCashBalance"),
+    ["GetInventoryValue"] = v4("GetInventoryValue"),
+    ["GetInventoryItems"] = v4("GetInventoryItems"),
+    ["InventoryValueChanged"] = v5("InventoryValueChanged"),
+    ["InventoryChanged"] = v5("InventoryChanged"),
+    ["SetInventoryItemLocked"] = v4("SetInventoryItemLocked"),
+    ["RefreshLuck"] = v5("RefreshLuck"),
+    ["SellItems"] = v4("SellItem"),
+    ["SellItemsByUuid"] = v4("SellItemsByUuid"),
+    ["PurchaseCase"] = v4("PurchaseCase"),
+    ["GetCrateWhitelist"] = v4("GetCrateWhitelist"),
+    ["GetNewCratesList"] = v4("GetNewCratesList"),
+    ["WhitelistsUpdated"] = v5("WhitelistsUpdated"),
+    ["RollResult"] = v5("RollResult"),
+    ["RollResultLanded"] = v5("RollResultLanded"),
+    ["NewHintForPlayer"] = v5("NewHintForPlayer"),
+    ["NewChatHintForPlayer"] = v5("NewChatHintForPlayer"),
+    ["GetShopPolicyInfo"] = v4("GetShopPolicyInfo"),
+    ["GetShopGiftQuote"] = v4("GetShopGiftQuote"),
+    ["PromptToUnlockCrateSlots"] = v5("PromptToUnlockCrateSlots"),
+    ["PromptToUpgradeCaseTime"] = v5("PromptToUpgradeCaseTime"),
+    ["PromptToPurchaseCashPack"] = v5("PromptToPurchaseCashPack"),
+    ["PromptToPurchaseGift"] = v4("PromptToPurchaseGift"),
+    ["TriggerConfetti"] = v5("TriggerConfetti"),
+    ["ShopGiftPurchaseCompleted"] = v5("ShopGiftPurchaseCompleted"),
+    ["MarkFTUXComplete"] = v4("MarkFTUXComplete"),
+    ["IsFTUXComplete"] = v4("IsFTUXComplete"),
+    ["TrackFTUXStep"] = v4("TrackFTUXStep"),
+    ["ClaimPlaytimeReward"] = v4("ClaimPlaytimeReward"),
+    ["PlaytimeRewardsRefreshed"] = v5("PlaytimeRewardsRefreshed"),
+    ["PlaytimeRewardsUpdated"] = v5("PlaytimeRewardsUpdated"),
+    ["GetBankItems"] = v4("GetBankItems"),
+    ["BankItemsChanged"] = v5("BankItemsChanged"),
+    ["CollectPayout"] = v4("CollectPayout"),
+    ["DepositItem"] = v4("DepositItem"),
+    ["WithdrawItem"] = v4("WithdrawItem"),
+    ["SwapItemInSlot"] = v4("SwapItemInSlot"),
+    ["PurchaseBankSlot"] = v4("PurchaseBankSlot"),
+    ["GetLeaderboardData"] = v4("GetLeaderboardData"),
+    ["GetMyLeaderboardValue"] = v4("GetMyLeaderboardValue"),
+    ["LeaderboardDataUpdated"] = v5("LeaderboardDataUpdated"),
+    ["TrackLeaderboardInteraction"] = v4("TrackLeaderboardInteraction"),
+    ["ClientReportsZoneChanged"] = v4("ClientReportsZoneChanged"),
+    ["PyroGoldBurst"] = v5("PyroGoldBurst"),
+    ["PyroRedBurst"] = v5("PyroRedBurst"),
+    ["PyroSparksAndCo2"] = v5("PyroSparksAndCo2"),
+    ["Demo"] = v5("Demo"),
+    ["CreateCaseBattle"] = v4("CreateCaseBattle"),
+    ["JoinCaseBattle"] = v4("JoinCaseBattle"),
+    ["LeaveCaseBattle"] = v4("LeaveCaseBattle"),
+    ["GetCaseBattleSessions"] = v4("GetCaseBattleSessions"),
+    ["GetCaseBattleSetpoints"] = v4("GetCaseBattleSetpoints"),
+    ["StartViewingCaseBattleList"] = v5("StartViewingCaseBattleList"),
+    ["StopViewingCaseBattleList"] = v5("StopViewingCaseBattleList"),
+    ["StartSpectatingCaseBattle"] = v5("StartSpectatingCaseBattle"),
+    ["StopSpectatingCaseBattle"] = v5("StopSpectatingCaseBattle"),
+    ["AddBotToCaseBattle"] = v4("AddBotToCaseBattle"),
+    ["CaseBattleSessionRemoved"] = v5("CaseBattleSessionRemoved"),
+    ["CaseBattleSetpointsUpdated"] = v5("CaseBattleSetpointsUpdated"),
+    ["GetPendingCaseBattleResume"] = v4("GetPendingCaseBattleResume"),
+    ["CaseBattleResumeBattle"] = v5("CaseBattleResumeBattle"),
+    ["CaseBattleShowEarnedItems"] = v5("CaseBattleShowEarnedItems"),
+    ["GetCaseBattleCrates"] = v4("GetCaseBattleCrates"),
+    ["_RequestChunkedTransfer"] = v4("_RequestChunkedTransfer"),
+    ["_ChunkedPayload"] = v5("_ChunkedPayload")
+}
